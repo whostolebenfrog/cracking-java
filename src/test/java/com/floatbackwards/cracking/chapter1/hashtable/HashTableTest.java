@@ -1,6 +1,9 @@
 package com.floatbackwards.cracking.chapter1.hashtable;
 
 import org.junit.Test;
+
+import java.util.LinkedList;
+
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 
@@ -92,5 +95,12 @@ public class HashTableTest {
         assertThat(a, is(table.get("a")));
     }
 
+    @Test
+    public void canPutLinkedListIntoHashTable() {
+        HashTable table = new HashTable();
+        LinkedList a = new LinkedList();
+        table.put("mykey", a);
+        assertThat(a, is(table.get("mykey")));
+    }
 
 }

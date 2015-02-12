@@ -18,19 +18,6 @@ public class HashTable {
      hashArray = new Object[DEFAULT_SIZE];
    }
 
-   private static int hashCodeToArraySize(int hashCode, int hashArraySize) {
-      return hashCode % hashArraySize;
-   }
-
-   private static class HashTableEntry {
-      private final Object key;
-      private final Object value;
-
-      public HashTableEntry(Object key, Object value) {
-         this.key = key;
-         this.value = value;
-      }
-   }
 
    private void rebalance() {
       hashArraySize *= 2;
@@ -62,7 +49,10 @@ public class HashTable {
       put(key, o, hashArray, hashArraySize);
    }
 
-   // This actually has a bug if you try and store LinkedLists
+   private static int hashCodeToArraySize(int hashCode, int hashArraySize) {
+      return hashCode % hashArraySize;
+   }
+
    private static void put(Object key, Object o, Object[] data, int currentArraySize) {
       int hashKey = hashCodeToArraySize(key.hashCode(), currentArraySize);
       HashTableEntry entry = new HashTableEntry(key, o);
@@ -99,6 +89,16 @@ public class HashTable {
 
    public int getHashArraySize() {
       return hashArraySize;
+   }
+
+   private static class HashTableEntry {
+      private final Object key;
+      private final Object value;
+
+      public HashTableEntry(Object key, Object value) {
+         this.key = key;
+         this.value = value;
+      }
    }
 
 }
